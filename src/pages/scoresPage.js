@@ -7,15 +7,6 @@ import { SS } from '../app.js';
 import { save } from '../app.js';
 
 export const createScoresPage = () => {
-  const buttons = document.querySelectorAll('button');
-
-  Array.from(buttons).forEach((element) =>
-    element.addEventListener('click', initScoresPage)
-  );
-};
-
-const initScoresPage = () => {
-  createScoresPage();
   const scorePage = createScoresElement();
   save();
   const questionView = document.getElementById('question-element');

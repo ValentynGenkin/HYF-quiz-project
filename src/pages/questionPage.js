@@ -16,7 +16,6 @@ export const points = {
 };
 
 let alreadyAnswered = false;
-// let isAnswerSelected = false;
 
 export const initQuestionPage = () => {
   const userInterface = document.getElementById(USER_INTERFACE_ID);
@@ -28,7 +27,7 @@ export const initQuestionPage = () => {
     currentQuestion.correct
   );
   questionElement.id = 'question-element';
-  // add images
+  
   const currentImage = quizData.questions[quizData.currentQuestionIndex].image;
 
   const imageElement = document.createElement('img');
@@ -47,22 +46,16 @@ export const initQuestionPage = () => {
 
     const questionButton = document.getElementById(ANSWERS_LIST_ID).children;
 
-    Array.from(questionButton).forEach((button) => {
+    for (let button of questionButton) {
       button.addEventListener('click', function () {
-        if (quizData.currentQuestionIndex < 9) {
+        if (quizData.currentQuestionIndex <= 9) {
           alreadyAnswered = true;
           answerSave();
-        } else {
-          SS.clear();
         }
       });
-    });
+    }
 
     answerElement.addEventListener('click', () => {
-      // isAnswerSelected = true;
-      // nextQuestionButton.disabled = false;
-      // Reset the timer
-
       const currentQuestionElement = document.getElementById(
         'question-element'
       );
@@ -87,21 +80,21 @@ export const initQuestionPage = () => {
   }
 
   const nextQuestionButton = document.getElementById(NEXT_QUESTION_BUTTON_ID);
-  // nextQuestionButton.disabled = true;
 
-  document
-    .getElementById(NEXT_QUESTION_BUTTON_ID)
-    .addEventListener('click', function () {
-      alreadyAnswered = false;
-      answerSave();
-    });
+  nextQuestionButton.addEventListener('click', function () {
+    alreadyAnswered = false;
+    answerSave();
 
-  document
-    .getElementById(NEXT_QUESTION_BUTTON_ID)
-    .addEventListener('click', nextQuestion);
+    if (quizData.currentQuestionIndex === 9) {
+      createScoresPage();
+    }
+  });
+
+  if (quizData.currentQuestionIndex < 9) {
+    nextQuestionButton.addEventListener('click', nextQuestion);
+  }
 
   document.getElementById(SKIP_BUTTON_ID).addEventListener('click', () => {
-    // nextQuestionButton.disabled = false;
     alreadyAnswered = 'skip';
     answerSave();
 
@@ -115,19 +108,6 @@ export const initQuestionPage = () => {
     const currentQuestionElement = document.getElementById('question-element');
     clearInterval(currentQuestionElement.intervalID);
   });
-
-  nextQuestionButton.addEventListener('click', function () {
-    // if (!isAnswerSelected) {
-    //   return;
-    // }
-    alreadyAnswered = false;
-    answerSave();
-    // nextQuestion();
-  });
-
-  if (quizData.currentQuestionIndex === 9) {
-    createScoresPage();
-  }
 };
 
 const nextQuestion = () => {
@@ -138,10 +118,8 @@ const nextQuestion = () => {
   if (quizData.currentQuestionIndex < 9) {
     quizData.currentQuestionIndex = quizData.currentQuestionIndex + 1;
   }
-
-  initQuestionPage();
-  alreadyAnswered = false;
   positionSave();
+  initQuestionPage();
 };
 
 export function pointsSave() {

@@ -6,7 +6,6 @@ import {
   ANSWERS_LIST_ID,
   ALERT_IF_ANSWERED,
   SKIP_BUTTON_ID,
-  NEXT_QUESTION_BUTTON_ID,
   ALERT_IF_SKIP,
 } from './constants.js';
 import { initQuestionPage } from './pages/questionPage.js';
@@ -94,7 +93,8 @@ const hideButton = () => {
   const showAnswerButton = document.getElementById(SKIP_BUTTON_ID);
   showAnswerButton.style.display = 'none';
   const nextQuestionButton = document.getElementsByClassName('navigation');
-  Array.from(nextQuestionButton).forEach(
-    (element) => (element.style.justifyContent = 'center')
-  );
+
+  for (let button of nextQuestionButton) {
+    button.style.justifyContent = 'center';
+  }
 };

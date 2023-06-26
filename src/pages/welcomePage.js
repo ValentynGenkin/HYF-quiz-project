@@ -20,13 +20,11 @@ export const initWelcomePage = () => {
   const welcomeCover = createWelcomePageCover();
   userInterface.appendChild(welcomeCover);
 
-  document
-    .getElementById(START_QUIZ_BUTTON_ID)
-    .addEventListener('click', getName);
+  const startQuizButton = document.getElementById(START_QUIZ_BUTTON_ID);
 
-  document
-    .getElementById(START_QUIZ_BUTTON_ID)
-    .addEventListener('click', startQuiz);
+  startQuizButton.addEventListener('click', getName);
+
+  startQuizButton.addEventListener('click', startQuiz);
 };
 
 export const playerName = [];
@@ -38,21 +36,17 @@ export const getName = () => {
   }
 };
 
-// Need to do - stop loading if input is empty
-
 const startQuiz = () => {
   const inputValue = document.getElementById(WELCOME_PAGE_INPUT).value;
+  const inputAlert = document.getElementById(WELCOME_PAGE_INPUT);
 
   if (inputValue === '') {
     let alertMessage = document.createElement('div');
     alertMessage.textContent = 'Please enter your name!';
     alertMessage.style.color = 'red';
-    document
-      .getElementById(WELCOME_PAGE_INPUT)
-      .insertAdjacentElement('afterend', alertMessage);
+    inputAlert.insertAdjacentElement('afterend', alertMessage);
   } else {
     initQuestionPage();
-
     pointsSave();
     positionSave();
     answerSave();
