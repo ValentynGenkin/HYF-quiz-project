@@ -9,18 +9,21 @@ import {
 } from '../constants.js';
 import { playerName } from '../pages/welcomePage.js';
 import { points } from '../pages/questionPage.js';
+import { hideButton } from '../app.js';
+import { hideTimer } from '../pages/questionPage.js';
+import { answerSave } from '../pages/questionPage.js';
+import { buttonDisable } from '../app.js';
 
 /**
  * Create a full question element
  * @returns {Element}
  */
-export const createQuestionElement = (question, correctAnswer) => {
+
+export const createQuestionElement = (question) => {
   const element = document.createElement('div');
-  // Set timer in Second
+
   let timer = 10;
 
-  console.log(points.points);
-  // I use String.raw just to get fancy colors for the HTML in VS Code.
   element.innerHTML = String.raw`
     <div class='question-data'>
     <h1 class='question-header'>${question}</h1>
@@ -48,26 +51,18 @@ export const createQuestionElement = (question, correctAnswer) => {
   `;
 
   const intervalID = setInterval(() => {
-    if (timer === 0) {
-      document.getElementById(NEXT_QUESTION_BUTTON_ID).disabled = false;
-      // Remove the timer from screen
+    if (timer === 1) {
       clearInterval(intervalID);
-      document.getElementById('timer').style.display = 'none';
-
-      // Show the correct answer
-      const correctAnswerElement = document.getElementById(correctAnswer);
-      correctAnswerElement.style.backgroundColor = 'green';
-
-      // Disable click events for other answer elements
-      const answers = document.getElementById(ANSWERS_LIST_ID);
-      for (const answer of answers.children) {
-        answer.style.pointerEvents = 'none';
-      }
+      hideButton();
+      hideTimer();
+      answerSave();
+      buttonDisable();
     } else {
       timer--;
       document.getElementById('timer').textContent = timer;
     }
   }, 1000);
+
   element.intervalID = intervalID;
   return element;
 };

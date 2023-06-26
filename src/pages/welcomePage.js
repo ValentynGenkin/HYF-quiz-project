@@ -3,6 +3,7 @@ import {
   START_QUIZ_BUTTON_ID,
   WELCOME_PAGE_INPUT,
 } from '../constants.js';
+
 import { createWelcomeElement } from '../views/welcomeView.js';
 import { initQuestionPage } from './questionPage.js';
 import { createWelcomePageCover } from '../views/welcomeView.js';

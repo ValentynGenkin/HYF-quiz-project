@@ -11,6 +11,7 @@ import {
 import { initQuestionPage } from './pages/questionPage.js';
 import { playerName } from './pages/welcomePage.js';
 import { points } from './pages/questionPage.js';
+import { hideTimer } from './pages/questionPage.js';
 
 export const SS = sessionStorage;
 export const LS = localStorage;
@@ -62,6 +63,7 @@ const loadApp = () => {
       document.getElementById(SKIP_BUTTON_ID).disabled = 'true';
       buttonDisable();
       hideButton();
+      hideTimer();
     }
   }
   if (SS.getItem('alreadyAnswered') === 'skip') {
@@ -70,6 +72,7 @@ const loadApp = () => {
       buttonDisable();
       hideButton();
       dataSaver();
+      hideTimer();
     }
   }
 };
@@ -82,14 +85,14 @@ const dataSaver = () => {
   document.getElementById(POINTS_ID).textContent = `${points.points}`;
 };
 
-const buttonDisable = () => {
+export const buttonDisable = () => {
   const answersListElement = document.getElementById(ANSWERS_LIST_ID);
   for (let item of answersListElement.children) {
     item.style.pointerEvents = 'none';
   }
 };
 
-const hideButton = () => {
+export const hideButton = () => {
   const showAnswerButton = document.getElementById(SKIP_BUTTON_ID);
   showAnswerButton.style.display = 'none';
   const nextQuestionButton = document.getElementsByClassName('navigation');

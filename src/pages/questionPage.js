@@ -10,24 +10,32 @@ import { createAnswerElement } from '../views/answerView.js';
 import { createScoresPage } from './scoresPage.js';
 import { quizData } from '../data.js';
 import { SS } from '../app.js';
-
+import { hideButton } from '../app.js';
 export const points = {
   points: 0,
 };
 
-let alreadyAnswered = false;
+export let alreadyAnswered = false;
 
 export const initQuestionPage = () => {
   const userInterface = document.getElementById(USER_INTERFACE_ID);
   userInterface.innerHTML = '';
   const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
 
-  const questionElement = createQuestionElement(
-    currentQuestion.text,
-    currentQuestion.correct
-  );
+  let timer = 0;
+
+  const timeLimit = setInterval(() => {
+    timer++;
+    if (timer === 10) {
+      alreadyAnswered = true;
+      clearInterval(timeLimit);
+    }
+  }, 1000);
+
+  const questionElement = createQuestionElement(currentQuestion.text);
+
   questionElement.id = 'question-element';
-  
+
   const currentImage = quizData.questions[quizData.currentQuestionIndex].image;
 
   const imageElement = document.createElement('img');
@@ -44,23 +52,12 @@ export const initQuestionPage = () => {
     const answerElement = createAnswerElement(key, answerText);
     answersListElement.appendChild(answerElement);
 
-    const questionButton = document.getElementById(ANSWERS_LIST_ID).children;
-
-    for (let button of questionButton) {
-      button.addEventListener('click', function () {
-        if (quizData.currentQuestionIndex <= 9) {
-          alreadyAnswered = true;
-          answerSave();
-        }
-      });
-    }
+    const currentQuestionElement = document.getElementById('question-element');
 
     answerElement.addEventListener('click', () => {
-      const currentQuestionElement = document.getElementById(
-        'question-element'
-      );
       clearInterval(currentQuestionElement.intervalID);
       const buttonColor = document.getElementById(key);
+
       if (key == currentQuestion.correct) {
         buttonColor.style.backgroundColor = 'green';
         points.points++;
@@ -74,8 +71,20 @@ export const initQuestionPage = () => {
       for (let item of answersListElement.children) {
         item.style.pointerEvents = 'none';
       }
-
+      hideTimer();
+      hideButton();
       pointsSave();
+    });
+  }
+
+  const questionButton = document.getElementById(ANSWERS_LIST_ID).children;
+
+  for (let button of questionButton) {
+    button.addEventListener('click', function () {
+      if (quizData.currentQuestionIndex <= 9) {
+        alreadyAnswered = true;
+        answerSave();
+      }
     });
   }
 
@@ -97,6 +106,8 @@ export const initQuestionPage = () => {
   document.getElementById(SKIP_BUTTON_ID).addEventListener('click', () => {
     alreadyAnswered = 'skip';
     answerSave();
+    hideButton();
+    hideTimer();
 
     const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
     const correctAnswer = document.getElementById(currentQuestion.correct);
@@ -134,3 +145,6 @@ export function positionSave() {
 export function answerSave() {
   SS.setItem('alreadyAnswered', alreadyAnswered);
 }
+export const hideTimer = () => {
+  document.getElementById('timer').style.display = 'none';
+};
