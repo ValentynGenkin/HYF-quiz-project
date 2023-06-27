@@ -60,13 +60,13 @@ export const initQuestionPage = () => {
       const buttonColor = document.getElementById(key);
 
       if (key == currentQuestion.correct) {
-        buttonColor.style.backgroundColor = 'green';
+        buttonColor.style.backgroundColor = 'rgb(33, 217, 128)';
         points.points++;
         document.getElementById(POINTS_ID).textContent = `${points.points}`;
       } else {
-        buttonColor.style.backgroundColor = 'red';
+        buttonColor.style.backgroundColor = 'rgb(227, 120, 120)';
         const correctAnswer = document.getElementById(currentQuestion.correct);
-        correctAnswer.style.backgroundColor = 'green';
+        correctAnswer.style.backgroundColor = 'rgb(33, 217, 128)';
       }
 
       for (let item of answersListElement.children) {
@@ -112,7 +112,7 @@ export const initQuestionPage = () => {
 
     const currentQuestion = quizData.questions[quizData.currentQuestionIndex];
     const correctAnswer = document.getElementById(currentQuestion.correct);
-    correctAnswer.style.backgroundColor = 'green';
+    correctAnswer.style.backgroundColor = 'rgb(33, 217, 128)';
     for (let item of answersListElement.children) {
       item.style.pointerEvents = 'none';
     }

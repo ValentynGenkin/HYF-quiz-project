@@ -20,8 +20,8 @@ export const createWelcomeElement = () => {
   const element = document.createElement('div');
   element.id = `${WELCOME_PAGE_ELEMENT}`;
   element.innerHTML = String.raw`
-    <h1 id="${WELCOME_TITLE_ID}">Test Your Art Knowledge!</h1>
-    <p id="${WELCOME_PAGE_PARAGRAPH_ID}">Welcome to our Quiz App, where you can put your art expertise to the test!<br /><span>Are you up for the challenge?</span></p>
+    <h1 id="${WELCOME_TITLE_ID}">Test Your art knowledge</h1>
+    <p id="${WELCOME_PAGE_PARAGRAPH_ID}">Welcome to Art Quiz App, where you can put your art expertise to the test!<br/><span>Are you up for the challenge?</span></p>
     <input type="text" id="${WELCOME_PAGE_INPUT}" name="name" required placeholder="Enter Your Name">
     <button id="${START_QUIZ_BUTTON_ID}">Start Quiz</button>
   `;

@@ -22,5 +22,6 @@ export const createScoresPage = () => {
     const winnerItem = winner(i);
     document.getElementById(RESULTS).appendChild(winnerItem);
   }
+
   SS.clear();
 };

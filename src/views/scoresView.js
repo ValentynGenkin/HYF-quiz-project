@@ -44,9 +44,9 @@ export const winner = (i) => {
 
   const element = document.createElement('tr');
   element.innerHTML = String.raw`
-  <td>${i}</td>
-  <td>${winnerName}</td>
-  <td>${winnerScore}</td>
+  <td style="text-align: center; font-size: 11px">${i}</td>
+  <td style="padding: 2px 2px 2px 10px";>${winnerName}</td>
+  <td style="text-align: center; font-weight: bold">${winnerScore}</td>
   `;
   return element;
 };

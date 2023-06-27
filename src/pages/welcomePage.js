@@ -44,8 +44,9 @@ const startQuiz = () => {
   if (inputValue === '') {
     let alertMessage = document.createElement('div');
     alertMessage.textContent = 'Please enter your name!';
-    alertMessage.style.color = 'red';
+    alertMessage.style.color = 'rgb(227, 120, 120)';
     inputAlert.insertAdjacentElement('afterend', alertMessage);
+    alertMessage.id = 'alertMessage';
   } else {
     initQuestionPage();
     pointsSave();
