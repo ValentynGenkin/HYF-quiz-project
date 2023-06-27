@@ -36,6 +36,21 @@ body {
   overflow: hidden;
   box-shadow: 0 0 10px 3px rgb(174, 174, 174);
 }
+
+.question-image {
+  animation: slideInFromRight 0.8s ease-in;
+}
+
+@keyframes slideInFromRight {
+  0% {
+    transform: translateX(100%);
+  }
+
+  100% {
+    transform: translateX(0%);
+  }
+}
+
 #user-interface #welcome-page-element {
   width: 50%;
   min-width: 20rem;
