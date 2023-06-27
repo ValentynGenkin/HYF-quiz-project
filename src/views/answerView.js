@@ -9,7 +9,7 @@ export const createAnswerElement = (key, answerText) => {
   optionButton.type = 'button';
   optionButton.classList.add('answer-btn');
   optionButton.id = key;
-  optionButton.innerHTML = String.raw`${key} : ${answerText}`;
+  optionButton.innerHTML = String.raw`${answerText}`;
   element.appendChild(optionButton);
 
   return element;

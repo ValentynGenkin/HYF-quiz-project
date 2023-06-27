@@ -4,6 +4,7 @@ import {
   USER_INTERFACE_ID,
   POINTS_ID,
   SKIP_BUTTON_ID,
+  RESTART,
 } from '../constants.js';
 import { createQuestionElement } from '../views/questionView.js';
 import { createAnswerElement } from '../views/answerView.js';
@@ -119,6 +120,13 @@ export const initQuestionPage = () => {
     const currentQuestionElement = document.getElementById('question-element');
     clearInterval(currentQuestionElement.intervalID);
   });
+
+  const restartButton = document.getElementById(RESTART);
+  restartButton.style.display = 'block';
+  restartButton.addEventListener('click', () => {
+    SS.clear();
+    location.reload();
+  });
 };
 
 const nextQuestion = () => {
@@ -146,5 +154,5 @@ export function answerSave() {
   SS.setItem('alreadyAnswered', alreadyAnswered);
 }
 export const hideTimer = () => {
-  document.getElementById('timer').style.display = 'none';
+  document.getElementById('timer').style.color = 'transparent';
 };

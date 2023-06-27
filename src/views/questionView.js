@@ -6,6 +6,7 @@ import {
   SKIP_BUTTON_ID,
   ALERT_IF_ANSWERED,
   ALERT_IF_SKIP,
+  RESTART,
 } from '../constants.js';
 import { playerName } from '../pages/welcomePage.js';
 import { points } from '../pages/questionPage.js';
@@ -45,9 +46,11 @@ export const createQuestionElement = (question) => {
       <button id="${SKIP_BUTTON_ID}">
         Show Answer
       </button>
+
     </div>
     <p class="user-score">${playerName[0]}, your score: <span id='${POINTS_ID}'>${points.points}</span></p>
     </div>
+
   `;
 
   const intervalID = setInterval(() => {

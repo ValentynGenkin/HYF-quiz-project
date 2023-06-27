@@ -24,3 +24,4 @@ export const FINALE_SCORE = 'finale-score';
 export const FINALE_GREET = 'greet';
 export const SCORE_TABLE = 'score-table';
 export const RESULTS = 'results';
+export const RESTART = 'restart';
